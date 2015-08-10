@@ -15,7 +15,13 @@
         {% for spellClass in site.data.classes %}
           <a class="page-link" href="{{site.baseurl}}/tags/{{spellClass.tag}}.html">{{ spellClass.name }}</a>
         {% endfor %}
+        <!-- if links to lists of only each type is desired, this will do it.
+        {% for type in site.data.types %}
+          <a class="page-link" href="{{site.baseurl}}/tags/{{type.tag}}.html">{{type.name}}</a>
+        {% endfor %}
+        -->
       </div>
+
     </nav>
 
   </div>

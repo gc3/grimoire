@@ -2,10 +2,10 @@
 layout: post
 title:  "Identify"
 date:   2014-08-24
-tags: [bard, wizard, level1]
+tags: [bard, wizard, ritual, level1]
 ---
 
-**1st-level divination (Ritual)**
+**1st-level divination (ritual)**
 
 **Casting Time**: 1 minute
 

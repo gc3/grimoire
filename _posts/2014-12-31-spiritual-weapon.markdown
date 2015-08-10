@@ -2,7 +2,7 @@
 layout: post
 title:  "Spiritual Weapon"
 date:   2014-12-31
-tags: [cleric, level2]
+tags: [cleric, ritual, level2]
 ---
 
 **2nd-level evocation**

@@ -11,18 +11,66 @@
     <script src="//use.typekit.net/nra6zxt.js"></script>
     <script>try{Typekit.load();}catch(e){}</script>
     <script type="text/javascript">
+
+      // Utility functions to mess with CSS classes of a given element
+      function removeClass(elt, class_name) {
+        elt.className = elt.className.replace(
+          new RegExp("(?:^|\\s)" + class_name + "(?!\\S)", "g"),
+          ''
+        );
+      }
+
+      function addClass(elt, class_name) {
+        if(elt.className.indexOf(class_name) == -1) {
+          elt.className += " " + class_name;
+        }
+      }
+
+      // When clicking on a type link, highlight all the matching posts.
+      function typeClick(type, e) {
+        elts = document.getElementsByClassName("post-link");
+        for (i = 0; i < elts.length; i++) {
+          if (elts[i].className.indexOf("type-" + type) > -1) {
+            addClass(elts[i], "post-link-highlight");
+          }
+        }
+      }
+
+      // Undo whatever typeClick() did to the posts it touched.
+      function typeClickClearAll(e) {
+        elts = document.getElementsByClassName("post-link");
+        for (i = 0; i < elts.length; i++) {
+          if (elts[i].className.indexOf("post-link-highlight") > -1) {
+            removeClass(elts[i], "post-link-highlight");
+          }
+        }
+      }
+
     	function menuClick() {
     		// console.log("clicked");
     		if ( document.getElementById("menu").className.match(/(?:^|\s)show(?!\S)/) ) {
-    			document.getElementById("menu").className = document.getElementById("menu").className.replace ( /(?:^|\s)show(?!\S)/g , '' )
+    			removeClass(document.getElementById("menu"), "show");
     		}
     		else {
-    			document.getElementById("menu").className += " show";
+          addClass(document.getElementById("menu"), "show");
     		}
-  		}
+      }
 
-  		window.onload = function(){
+      window.onload = function() {
         document.getElementById("menuIcon").addEventListener( 'click' , menuClick );
-	    }	
+        // add handlers for selecting a spell type on spell list pages
+        {% if page.dir != "/spells" %}
+          {% for type in site.data.types %}
+            document.getElementById("type-{{type.tag}}").addEventListener(
+              'click',
+              typeClick.bind(this, "{{type.tag}}")
+            );
+          {% endfor %}
+          document.getElementById("type-clear-all").addEventListener(
+            'click',
+             typeClickClearAll
+          );
+        {% endif %}
+	    }
     </script>
 </head>

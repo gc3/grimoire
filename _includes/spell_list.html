@@ -1,0 +1,57 @@
+<!-- Create level selection list and spell type filter links -->
+<dl class="tag-list">
+  <dt>Spell tier:</dt>
+  {% for level in site.data.levels %}
+    <dd>
+      <a href="#{{level.tag}}">{{level.name}}</a>
+    </dd>
+  {% endfor %}
+</dl>
+<dl class="tag-list">
+  <dt>Spell type:</dt>
+  {% for type in site.data.types %}
+    <dd>
+      <a href="#" id="type-{{type.tag}}">{{type.name}}</a>
+    </dd>
+  {% endfor %}
+  <dd>
+    <a href="#" id="type-clear-all">Clear All</a>
+  </dd>
+</dl>
+
+<!-- Add all the posts to the page -->
+{% for level in site.data.levels %}
+  <a id="{{level.tag}}"></a>
+  <h2 class="post-list-head">{{level.title}}</h2>
+  <ul class="post-list">
+  {% assign post_list = site.tags.[{{level.tag}}] | sort: 'title' %}
+  {% for post in post_list %}
+    <!-- Calculate what the classes should be for the post link -->
+    {% assign post_classes = "post-link" %}
+    {% for tag in post.tags %}
+      {% for type in site.data.types %}
+        {%if type.tag == tag %}
+          {% capture post_classes %}{{post_classes}} type-{{tag}}{% endcapture %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+    <!-- Save the rendered post link for use below -->
+    {% capture post_link %}
+      <li>
+        <a class="{{post_classes}}" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+      </li>
+    {% endcapture %}
+    <!-- Handle the main index page or a page that's filtered by a tag -->
+    {% if page.tag %}
+      {% for tag in post.tags %}
+        {% if tag == page.tag %}
+          {{post_link}}
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      {{post_link}}
+    {% endif %}
+  {% endfor %}
+  </ul>
+  <a class="post-meta" href="#top">Back to top &#8593;</a>
+{% endfor %}
