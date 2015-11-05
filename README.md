@@ -5,6 +5,8 @@ Grimoire is a mobile-friendly 5e spellbook that organizes spell lists by class a
 See the latest compiled build here: [http://ephe.github.io/grimoire/](http://ephe.github.io/grimoire/)
 
 ## Changelog
+* 11/1/15: Merged in typo fixes, and some spells added from the Elemental Evil Player's Companion.
+* 10/19/15: Fixed Arcane Gate and Antilife Shell, and integrated [Jets.js](http://nexts.github.io/Jets.js/) into the main and class pages.
 * 8/8/15: Merged the rest of the spells in, started adding links to spell references, and pushed a new build. Thanks everyone!
 * 6/8/15: Merged pull requests and pushed a new build.
 * 5/29/15: Merged pull requests and pushed a new build. Thanks, y'all!
@@ -32,6 +34,12 @@ If you'd like to help fill out the rest of the spells from the PHB, for each new
 1. Make a new post inside `_posts/` for each new spell, and copy the formatting from another spell.
 2. Submit a pull request for the spell(s) when you're finished, and that's it! Thank you so much. :)
 
+## Build Instructions
+I've edited _config.yml for my own build purposes, but if you've got [Jekyll](http://jekyllrb.com) set up locally, the following should create the build from your friendly command line terminal:
+`jekyll serve -Vw --no-watch --baseurl ""`
+
 ## Thanks
 
 Cleric and wizard spells from the Starter Kit were seeded from [this Reddit post](http://www.reddit.com/r/DnD/comments/2a7wau/5e_cleric_and_wizard_spells_sorted_by_level/).
+
+Thanks to @sethxd for suggesting [Jets.js](http://nexts.github.io/Jets.js/), a CSS search engine that plays nicely with Jekyll.
